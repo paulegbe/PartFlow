@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.partflow.ui.Login"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <children>
+        <Label text="Username:" layoutX="150" layoutY="120"/>
+        <TextField fx:id="usernameField" layoutX="220" layoutY="120"/>
+
+        <Label text="Password:" layoutX="150" layoutY="160"/>
+        <PasswordField fx:id="passwordField" layoutX="220" layoutY="160"/>
+
+        <Button text="Login" layoutX="270" layoutY="210" onAction="#handleLogin"/>
+        <Label fx:id="messageLabel" layoutX="220" layoutY="250" textFill="#801a16"/>
+    </children>
+</AnchorPane>
