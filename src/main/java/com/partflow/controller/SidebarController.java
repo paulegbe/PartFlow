@@ -1,4 +1,4 @@
-package com.partflow.ui;
+package com.partflow.controller;
 
 public class SidebarController {
 }
