@@ -31,7 +31,7 @@ public class PartflowFXApp extends Application {
             loader.setControllerFactory(springContext::getBean);
             Parent root = loader.load();
 
-            primaryStage.setTitle("PartFlow Login");
+            primaryStage.setTitle("PartFlow LoginController");
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
         } catch (Exception e) {

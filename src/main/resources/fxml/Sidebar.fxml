@@ -6,9 +6,25 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.partflow.controller.SidebarController"
-            prefHeight="400.0" prefWidth="600.0">
+<!-- Sidebar.fxml -->
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.partflow.controller.SidebarController"
+      spacing="10"
+      style="-fx-background-color: #1D2939;
+      -fx-padding: 20;">
+    <Label
+            text="PartFlow"
+           style="-fx-text-fill: white;
+           -fx-font-size: 24px;
+           -fx-font-weight: bold;"
+    />
 
-</AnchorPane>
+    <Button text="Dashboard" onAction="#goToDashboard" />
+    <Button text="Inventory" onAction="#goToInventory" />
+    <Button text="Sales" onAction="#goToSales" />
+    <Button text="Vendors" onAction="#goToVendors" />
+    <Button text="Reports" onAction="#goToReports" />
+    <Button text="Restocking" onAction="#goToRestocking" />
+</VBox>
+

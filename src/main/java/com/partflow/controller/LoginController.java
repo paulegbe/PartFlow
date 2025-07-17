@@ -8,13 +8,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
 @Component
-public class Login {
+public class LoginController {
 
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
@@ -22,16 +21,8 @@ public class Login {
 
     private final UserService userService;
 
-    public Login(UserService userService) {
+    public LoginController(UserService userService) {
         this.userService = userService;
-    }
-
-    @PostConstruct
-    public void init() {
-        // Optional: confirm that Spring injected the service
-        if (userService == null) {
-            System.err.println("serService injection failed");
-        }
     }
 
     @FXML
@@ -43,21 +34,23 @@ public class Login {
 
         if (success) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Dashboard.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
                 loader.setControllerFactory(ApplicationContextProvider.getApplicationContext()::getBean);
 
                 Parent root = loader.load();
+
                 Stage stage = (Stage) usernameField.getScene().getWindow();
                 stage.setScene(new Scene(root));
-                stage.setTitle("PartFlow Dashboard");
+                stage.setTitle("PartFlow");
                 stage.show();
 
             } catch (IOException e) {
                 e.printStackTrace();
-                messageLabel.setText("Error loading dashboard");
+                messageLabel.setText("Error loading main application.");
             }
         } else {
             messageLabel.setText("Invalid username or password");
         }
     }
+
 }
