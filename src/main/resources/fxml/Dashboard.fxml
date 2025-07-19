@@ -1,13 +1,136 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <BorderPane prefHeight="43.0" prefWidth="600.0">
+               <left>
+                  <Label text="Dashboard" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="Microsoft JhengHei Bold" size="24.0" />
+                     </font>
+                  </Label>
+               </left>
+            </BorderPane>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Pane prefHeight="107.0" prefWidth="200.0">
+                     <children>
+                        <VBox layoutX="21.0" layoutY="-2.0" prefHeight="100.0" prefWidth="144.0">
+                           <children>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                 <center>
+                                    <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <Label text="Total Part" />
+                                          <Label text="Label" />
+                                       </children>
+                                    </VBox>
+                                 </center>
+                              </BorderPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="107.0" prefWidth="200.0">
+                     <children>
+                        <VBox layoutX="21.0" layoutY="-2.0" prefHeight="100.0" prefWidth="144.0">
+                           <children>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                 <center>
+                                    <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <Label text="Low Stock Alert" />
+                                          <Label text="Label" />
+                                       </children>
+                                    </VBox>
+                                 </center>
+                              </BorderPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="107.0" prefWidth="200.0">
+                     <children>
+                        <VBox layoutX="21.0" layoutY="-2.0" prefHeight="100.0" prefWidth="144.0">
+                           <children>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                 <center>
+                                    <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <Label text="Sales Today" />
+                                          <Label text="Label" />
+                                       </children>
+                                    </VBox>
+                                 </center>
+                              </BorderPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="107.0" prefWidth="200.0">
+                     <children>
+                        <VBox layoutX="21.0" layoutY="-2.0" prefHeight="100.0" prefWidth="144.0">
+                           <children>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                 <center>
+                                    <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <Label text="Out of Stock">
+                                             <font>
+                                                <Font name="Microsoft JhengHei" size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Label" />
+                                       </children>
+                                    </VBox>
+                                 </center>
+                              </BorderPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+            <HBox prefHeight="202.0" prefWidth="600.0">
+               <children>
+                  <VBox prefHeight="202.0" prefWidth="275.0">
+                     <children>
+                        <Label text="Low Stock Parts" />
+                        <TableView prefHeight="185.0" prefWidth="311.0">
+                          <columns>
+                            <TableColumn prefWidth="154.0" text="Part" />
+                            <TableColumn prefWidth="120.0" text="Stock" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="202.0" prefWidth="275.0">
+                     <children>
+                        <Label text="Sales Report" />
+                        <TableView prefHeight="185.0" prefWidth="311.0">
+                           <columns>
+                              <TableColumn prefWidth="189.0" text="Date" />
+                              <TableColumn prefWidth="85.0" text="Sales" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
 </AnchorPane>
