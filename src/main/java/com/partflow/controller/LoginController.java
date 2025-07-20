@@ -41,7 +41,7 @@ public class LoginController {
 
                 Stage stage = (Stage) usernameField.getScene().getWindow();
                 stage.setScene(new Scene(root));
-                stage.setTitle("PartFlow");
+                //stage.setTitle("PartFlow");
                 stage.show();
 
             } catch (IOException e) {

@@ -6,7 +6,10 @@
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.partflow.controller.MainController"
-            fx:id="rootPane">
+            fx:id="rootPane"
+            stylesheets= "@../css/style.css"
+
+>
 
     <left>
         <StackPane fx:id="sidebar" />

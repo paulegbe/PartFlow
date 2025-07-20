@@ -6,5 +6,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface PartRepository extends JpaRepository<Part, Long> {
     Part findByPartNumber(String partNumber);
     Part findByPartName(String partName);
-    Part findByPartDescription(String partDescription);
 }

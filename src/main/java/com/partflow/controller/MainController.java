@@ -48,4 +48,8 @@ public class MainController {
             e.printStackTrace();
         }
     }
+
+    public BorderPane getRootPane() {
+        return rootPane;
+    }
 }
