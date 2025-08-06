@@ -13,9 +13,7 @@ public class Part {
     private double price;
     private int quantity;
     private boolean inStock;
-    @ManyToOne
-    @JoinColumn(name = "vendor_id")
-    private Vendor vendor;
+    private String Vendor;
     private int restockThreshold = 10; // minimum allowed quantity
     private int restockAmount = 200;    // how many to order when below threshold
 
@@ -47,12 +45,12 @@ public class Part {
         this.inStock = inStock;
     }
 
-    public Vendor getVendor() {
-        return vendor;
+    public String getVendor() {
+        return Vendor;
     }
 
-    public void setVendor(Vendor vendor) {
-        this.vendor = vendor;
+    public void setVendor(String vendor) {
+        this.Vendor = vendor;
     }
 
     public int getRestockThreshold() {

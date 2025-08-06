@@ -6,7 +6,7 @@ This document outlines a phased, sprint-based approach to completing the PartFlo
 
 **Methodology:** Agile (Scrum-like) with 1-week sprints.  
 **Key Roles:**
-*   **Product Owner:** David (Defines features, prioritizes backlog)
+*   **Product Owner:** Paul Egbe (Defines features, prioritizes backlog)
 *   **Development Team:** Gemini (Implements features)
 
 ---
