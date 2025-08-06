@@ -32,6 +32,8 @@ public class DashboardController {
 
     @FXML private TableView<Sale> salesReportTable;
     @FXML private TableColumn<Sale, String> saleDateColumn;
+    @FXML private TableColumn<Sale, String> salePartColumn;
+    @FXML private TableColumn<Sale, String> saleQuantityColumn;
     @FXML private TableColumn<Sale, String> saleAmountColumn;
 
     @Autowired private PartService partService;
@@ -78,7 +80,9 @@ public class DashboardController {
         ObservableList<Sale> salesData = FXCollections.observableArrayList(recentSales);
 
         saleDateColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getSaleDate().toLocalDate().toString()));
-        saleAmountColumn.setCellValueFactory(data -> new SimpleStringProperty("$" + data.getValue().getTotalPrice()));
+        salePartColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPart().getPartName()));
+        saleQuantityColumn.setCellValueFactory(data -> new SimpleStringProperty(String.valueOf(data.getValue().getQuantity())));
+        saleAmountColumn.setCellValueFactory(data -> new SimpleStringProperty(String.format("$%.2f", data.getValue().getTotalPrice())));
 
         salesReportTable.setItems(salesData);
     }

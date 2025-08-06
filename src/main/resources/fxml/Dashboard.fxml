@@ -41,6 +41,14 @@
                <Label fx:id="salesTodayLabel" text="0" styleClass="dashboard-value"/>
             </VBox>
             <VBox styleClass="dashboard-card" spacing="10">
+               <Label text="Sales This Month"/>
+               <Label fx:id="salesMonthLabel" text="0" styleClass="dashboard-value"/>
+            </VBox>
+            <VBox styleClass="dashboard-card" spacing="10">
+               <Label text="Total Sales (All Time)"/>
+               <Label fx:id="totalSalesLabel" text="0" styleClass="dashboard-value"/>
+            </VBox>
+            <VBox styleClass="dashboard-card" spacing="10">
                <Label text="Out of Stock"/>
                <Label fx:id="outOfStockLabel" text="0" styleClass="dashboard-value"/>
             </VBox>
@@ -53,8 +61,9 @@
                <Label text="Low Stock Parts" styleClass="contentTitle"/>
                <TableView fx:id="lowStockTable" prefHeight="200">
                   <columns>
-                     <TableColumn fx:id="lowStockPartColumn" text="Part" prefWidth="200"/>
-                     <TableColumn fx:id="lowStockQtyColumn" text="Stock" prefWidth="100"/>
+                     <TableColumn fx:id="lowStockPartColumn" text="Part" prefWidth="150"/>
+                     <TableColumn fx:id="lowStockQtyColumn" text="Stock" prefWidth="75"/>
+                     <TableColumn fx:id="lowStockVendorColumn" text="Vendor" prefWidth="100"/>
                   </columns>
                </TableView>
             </VBox>
@@ -64,8 +73,10 @@
                <Label text="Sales Report" styleClass="contentTitle"/>
                <TableView fx:id="salesReportTable" prefHeight="200">
                   <columns>
-                     <TableColumn fx:id="saleDateColumn" text="Date" prefWidth="200"/>
-                     <TableColumn fx:id="saleAmountColumn" text="Sales" prefWidth="100"/>
+                     <TableColumn fx:id="saleDateColumn" text="Date" prefWidth="100"/>
+                     <TableColumn fx:id="salePartColumn" text="Part" prefWidth="150"/>
+                     <TableColumn fx:id="saleQuantityColumn" text="Qty" prefWidth="50"/>
+                     <TableColumn fx:id="saleAmountColumn" text="Sales" prefWidth="75"/>
                   </columns>
                </TableView>
             </VBox>

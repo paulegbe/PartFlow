@@ -36,6 +36,13 @@ public class SaleService {
         saleRepository.deleteById(id);
     }
 
+    // NEW: Get sales within a specific month and year
+    public List<Sale> getSalesByMonth(int month, int year) {
+        LocalDateTime startOfMonth = LocalDateTime.of(year, month, 1, 0, 0);
+        LocalDateTime endOfMonth = startOfMonth.plusMonths(1).minusNanos(1);
+        return saleRepository.findBySaleDateBetween(startOfMonth, endOfMonth);
+    }
+
     // NEW: Get sales on a specific day
     public List<Sale> getSalesByDate(LocalDate date) {
         LocalDateTime startOfDay = date.atStartOfDay();
