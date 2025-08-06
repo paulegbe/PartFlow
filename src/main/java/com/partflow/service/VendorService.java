@@ -29,4 +29,8 @@ public class VendorService {
     public void deleteVendor(Long id) {
         vendorRepository.deleteById(id);
     }
+
+    public Vendor findByName(String name) {
+        return vendorRepository.findByName(name);
+    }
 }

@@ -24,11 +24,14 @@ public class DashboardController {
     @FXML private Label totalPartsLabel;
     @FXML private Label lowStockLabel;
     @FXML private Label salesTodayLabel;
+    @FXML private Label salesMonthLabel;
+    @FXML private Label totalSalesLabel;
     @FXML private Label outOfStockLabel;
 
     @FXML private TableView<Part> lowStockTable;
     @FXML private TableColumn<Part, String> lowStockPartColumn;
     @FXML private TableColumn<Part, Integer> lowStockQtyColumn;
+    @FXML private TableColumn<Part, String> lowStockVendorColumn;
 
     @FXML private TableView<Sale> salesReportTable;
     @FXML private TableColumn<Sale, String> saleDateColumn;
@@ -45,6 +48,12 @@ public class DashboardController {
         loadLowStockParts();
         loadSalesReport();
     }
+    
+    public void refreshDashboard() {
+        updateSummaryMetrics();
+        loadLowStockParts();
+        loadSalesReport();
+    }
 
     private void updateSummaryMetrics() {
         List<Part> allParts = partService.getAllParts();
@@ -52,13 +61,16 @@ public class DashboardController {
         long lowStockCount = allParts.stream().filter(p -> p.getQuantity() < p.getRestockThreshold()).count();
         long outOfStockCount = allParts.stream().filter(p -> p.getQuantity() == 0).count();
 
-        int salesToday = saleService.getSalesByDate(LocalDate.now()).stream()
-                .mapToInt(sale -> (int) sale.getTotalPrice()).sum();
+        long salesToday = saleService.getSalesByDate(LocalDate.now()).size();
+        long salesThisMonth = saleService.getSalesByMonth(LocalDate.now().getMonthValue(), LocalDate.now().getYear()).size();
+        long totalSalesAllTime = saleService.getAllSales().size();
 
         totalPartsLabel.setText(String.valueOf(allParts.size()));
         lowStockLabel.setText(String.valueOf(lowStockCount));
         outOfStockLabel.setText(String.valueOf(outOfStockCount));
-        salesTodayLabel.setText("$" + salesToday);
+        salesTodayLabel.setText(String.valueOf(salesToday));
+        salesMonthLabel.setText(String.valueOf(salesThisMonth));
+        totalSalesLabel.setText(String.valueOf(totalSalesAllTime));
     }
 
     private void loadLowStockParts() {
@@ -70,6 +82,10 @@ public class DashboardController {
 
         lowStockPartColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPartName()));
         lowStockQtyColumn.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getQuantity()).asObject());
+        lowStockVendorColumn.setCellValueFactory(data -> {
+            Part part = data.getValue();
+            return new SimpleStringProperty(part.getVendor() != null ? part.getVendor().getName() : "No Vendor");
+        });
 
         lowStockTable.setItems(partData);
     }
@@ -80,7 +96,10 @@ public class DashboardController {
         ObservableList<Sale> salesData = FXCollections.observableArrayList(recentSales);
 
         saleDateColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getSaleDate().toLocalDate().toString()));
-        salePartColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPart().getPartName()));
+        salePartColumn.setCellValueFactory(data -> {
+            Sale sale = data.getValue();
+            return new SimpleStringProperty(sale.getPart() != null ? sale.getPart().getPartName() : "Unknown Part");
+        });
         saleQuantityColumn.setCellValueFactory(data -> new SimpleStringProperty(String.valueOf(data.getValue().getQuantity())));
         saleAmountColumn.setCellValueFactory(data -> new SimpleStringProperty(String.format("$%.2f", data.getValue().getTotalPrice())));
 

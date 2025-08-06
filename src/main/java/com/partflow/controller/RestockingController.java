@@ -34,7 +34,10 @@ public class RestockingController {
 
         partColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPartName()));
         quantityColumn.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getQuantity()).asObject());
-        supplierColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getVendor().getName()));
+        supplierColumn.setCellValueFactory(data -> {
+            Part part = data.getValue();
+            return new SimpleStringProperty(part.getVendor() != null ? part.getVendor().getName() : "No Vendor");
+        });
 
         selectColumn.setCellValueFactory(data -> {
             Part part = data.getValue();

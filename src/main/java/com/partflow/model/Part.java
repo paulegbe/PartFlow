@@ -37,10 +37,13 @@ public class Part {
     public void setPrice(double price) { this.price = price; }
 
     public int getQuantity() { return quantity; }
-    public void setQuantity(int quantity) { this.quantity = quantity; }
+    public void setQuantity(int quantity) { 
+        this.quantity = quantity; 
+        this.inStock = quantity > 0; // Automatically update inStock based on quantity
+    }
 
     public boolean isInStock() {
-        return inStock;
+        return quantity > 0;
     }
 
     public void setInStock(boolean inStock) {

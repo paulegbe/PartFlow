@@ -114,3 +114,14 @@
     -fx-alignment: CENTER_LEFT;
 }
 
+.summaryLabel {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #007bff;
+    -fx-padding: 8 12 8 12;
+    -fx-background-color: #e3f2fd;
+    -fx-background-radius: 4;
+    -fx-border-color: #bbdefb;
+    -fx-border-radius: 4;
+}
+

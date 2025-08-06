@@ -28,56 +28,58 @@
 
          <!-- Dashboard Cards -->
          <HBox spacing="20">
-            <VBox styleClass="dashboard-card" spacing="10">
+            <VBox styleClass="dashboard-card" spacing="10" HBox.hgrow="ALWAYS">
                <Label text="Total Parts"/>
                <Label fx:id="totalPartsLabel" text="0" styleClass="dashboard-value"/>
             </VBox>
-            <VBox styleClass="dashboard-card" spacing="10">
+            <VBox styleClass="dashboard-card" spacing="10" HBox.hgrow="ALWAYS">
                <Label text="Low Stock Alert"/>
                <Label fx:id="lowStockLabel" text="0" styleClass="dashboard-value"/>
             </VBox>
-            <VBox styleClass="dashboard-card" spacing="10">
+            <VBox styleClass="dashboard-card" spacing="10" HBox.hgrow="ALWAYS">
                <Label text="Sales Today"/>
                <Label fx:id="salesTodayLabel" text="0" styleClass="dashboard-value"/>
             </VBox>
-            <VBox styleClass="dashboard-card" spacing="10">
+            <VBox styleClass="dashboard-card" spacing="10" HBox.hgrow="ALWAYS">
                <Label text="Sales This Month"/>
                <Label fx:id="salesMonthLabel" text="0" styleClass="dashboard-value"/>
             </VBox>
-            <VBox styleClass="dashboard-card" spacing="10">
+            <VBox styleClass="dashboard-card" spacing="10" HBox.hgrow="ALWAYS">
                <Label text="Total Sales (All Time)"/>
                <Label fx:id="totalSalesLabel" text="0" styleClass="dashboard-value"/>
             </VBox>
-            <VBox styleClass="dashboard-card" spacing="10">
+            <VBox styleClass="dashboard-card" spacing="10" HBox.hgrow="ALWAYS">
                <Label text="Out of Stock"/>
                <Label fx:id="outOfStockLabel" text="0" styleClass="dashboard-value"/>
             </VBox>
          </HBox>
 
          <!-- Tables Section -->
-         <HBox spacing="20">
+         <HBox spacing="20" VBox.vgrow="ALWAYS">
             <!-- Low Stock Table -->
-            <VBox spacing="10" VBox.vgrow="ALWAYS">
+            <VBox spacing="10" HBox.hgrow="ALWAYS">
                <Label text="Low Stock Parts" styleClass="contentTitle"/>
-               <TableView fx:id="lowStockTable" prefHeight="200">
+               <TableView fx:id="lowStockTable" VBox.vgrow="ALWAYS">
                   <columns>
-                     <TableColumn fx:id="lowStockPartColumn" text="Part" prefWidth="150"/>
-                     <TableColumn fx:id="lowStockQtyColumn" text="Stock" prefWidth="75"/>
-                     <TableColumn fx:id="lowStockVendorColumn" text="Vendor" prefWidth="100"/>
+                     <TableColumn fx:id="lowStockPartColumn" text="Part"/>
+                     <TableColumn fx:id="lowStockQtyColumn" text="Stock"/>
+                     <TableColumn fx:id="lowStockVendorColumn" text="Vendor"/>
                   </columns>
+                  <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/></columnResizePolicy>
                </TableView>
             </VBox>
 
             <!-- Sales Report Table -->
-            <VBox spacing="10" VBox.vgrow="ALWAYS">
+            <VBox spacing="10" HBox.hgrow="ALWAYS">
                <Label text="Sales Report" styleClass="contentTitle"/>
-               <TableView fx:id="salesReportTable" prefHeight="200">
+               <TableView fx:id="salesReportTable" VBox.vgrow="ALWAYS">
                   <columns>
-                     <TableColumn fx:id="saleDateColumn" text="Date" prefWidth="100"/>
-                     <TableColumn fx:id="salePartColumn" text="Part" prefWidth="150"/>
-                     <TableColumn fx:id="saleQuantityColumn" text="Qty" prefWidth="50"/>
-                     <TableColumn fx:id="saleAmountColumn" text="Sales" prefWidth="75"/>
+                     <TableColumn fx:id="saleDateColumn" text="Date"/>
+                     <TableColumn fx:id="salePartColumn" text="Part"/>
+                     <TableColumn fx:id="saleQuantityColumn" text="Qty"/>
+                     <TableColumn fx:id="saleAmountColumn" text="Sales"/>
                   </columns>
+                  <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/></columnResizePolicy>
                </TableView>
             </VBox>
          </HBox>
