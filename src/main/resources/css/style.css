@@ -168,6 +168,53 @@
 }
 
 /* Login screen specific styles */
+.login-background {
+    -fx-background-color: linear-gradient(to bottom right, #667eea 0%, #764ba2 100%);
+}
+
+.login-branding-card {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-radius: 20px;
+}
+
+.login-title {
+    -fx-text-fill: white;
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+}
+
+.login-subtitle {
+    -fx-text-fill: rgba(255, 255, 255, 0.8);
+    -fx-font-size: 16px;
+}
+
+.login-tagline {
+    -fx-text-fill: rgba(255, 255, 255, 0.7);
+    -fx-font-size: 14px;
+}
+
+.login-form-card {
+    -fx-background-color: white;
+    -fx-background-radius: 20px;
+}
+
+.login-welcome-title {
+    -fx-text-fill: #333333;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.login-signin-text {
+    -fx-text-fill: #666666;
+    -fx-font-size: 14px;
+}
+
+.login-label {
+    -fx-text-fill: #333333;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
 .login-button {
     -fx-background-color: #007BFF;
     -fx-background-radius: 8px;

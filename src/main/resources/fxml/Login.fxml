@@ -93,11 +93,7 @@
                      </children>
                   </VBox>
                   
-                  <Label style="-fx-text-fill: #999999; -fx-font-size: 11px;" text="© 2024 PartFlow. All rights reserved.">
-                     <font>
-                        <Font name="System" size="11.0" />
-                     </font>
-                  </Label>
+                  <Label text="© 2024 PartFlow. All rights reserved." styleClass="login-copyright"/>
                </children>
                <padding>
                   <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
