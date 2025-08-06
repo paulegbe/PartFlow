@@ -21,11 +21,7 @@
             <!-- Header -->
             <BorderPane prefHeight="60.0">
                <left>
-                  <Label text="Vendors" styleClass="pageTitle" BorderPane.alignment="CENTER">
-                     <font>
-                        <Font name="Microsoft JhengHei Bold" size="24.0"/>
-                     </font>
-                  </Label>
+                  <Label text="Vendors" styleClass="pageTitle" BorderPane.alignment="CENTER"/>
                </left>
                <right>
                   <Button fx:id="addVendorButton" text="Add Vendor" onAction="#handleAddVendor"

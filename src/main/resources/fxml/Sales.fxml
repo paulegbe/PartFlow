@@ -16,11 +16,7 @@
          <children>
 
             <!-- Title -->
-            <Label styleClass="pageTitle" text="Sales">
-               <font>
-                  <Font name="Microsoft JhengHei Bold" size="24.0" />
-               </font>
-            </Label>
+            <Label styleClass="pageTitle" text="Sales"/>
 
             <!-- Search & Record Button Row -->
             <HBox spacing="10">

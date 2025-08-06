@@ -60,9 +60,9 @@
                <children>
                   <HBox spacing="10.0" alignment="CENTER_LEFT">
                      <children>
-                        <Label styleClass="contentTitle" text="Report Content" />
+                        <Label styleClass="contentTitle" text="Report Content"/>
                         <Region HBox.hgrow="ALWAYS"/>
-                        <Button fx:id="exportButton" mnemonicParsing="false" text="Export Report" />
+                        <Button fx:id="exportButton" mnemonicParsing="false" text="Export Report"/>
                      </children>
                   </HBox>
                   <TextArea fx:id="reportContentArea" editable="false" promptText="Generated report content will appear here..." VBox.vgrow="ALWAYS" />

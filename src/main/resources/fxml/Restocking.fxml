@@ -16,11 +16,7 @@
       <VBox layoutX="3.0" layoutY="6.0" prefHeight="389.0" prefWidth="677.0">
          <children>
             <!-- Title -->
-            <Label styleClass="pageTitle" text="Restocking">
-               <font>
-                  <Font name="Microsoft JhengHei Bold" size="24.0" />
-               </font>
-            </Label>
+            <Label styleClass="pageTitle" text="Restocking"/>
 
             <!-- Search Bar -->
             <HBox prefHeight="89.0" prefWidth="608.0">
