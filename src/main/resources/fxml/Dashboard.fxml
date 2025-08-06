@@ -20,11 +20,7 @@
          </padding>
 
          <!-- Header -->
-         <Label text="Dashboard" styleClass="pageTitle">
-            <font>
-               <Font name="Microsoft JhengHei Bold" size="24.0"/>
-            </font>
-         </Label>
+                  <Label text="Dashboard" styleClass="pageTitle"/>
 
          <!-- Dashboard Cards -->
          <HBox spacing="20">

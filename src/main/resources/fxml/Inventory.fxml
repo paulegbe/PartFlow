@@ -21,11 +21,7 @@
                 <!-- Header Section -->
                 <HBox spacing="10.0" alignment="CENTER_LEFT">
                     <children>
-                        <Label styleClass="pageTitle" text="Inventory">
-                            <font>
-                                <Font name="Microsoft JhengHei Bold" size="24.0" />
-                            </font>
-                        </Label>
+                                                <Label styleClass="pageTitle" text="Inventory"/>
                         <Region HBox.hgrow="ALWAYS"/>
                         <Button fx:id="addPartButton" mnemonicParsing="false" onAction="#handleAddPart" prefHeight="31.0" prefWidth="139.0" text="Add Parts" />
                     </children>
