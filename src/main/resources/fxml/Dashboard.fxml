@@ -1,74 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="mainScreen" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="600.0" prefWidth="800.0"
+            styleClass="mainScreen"
+            stylesheets="@../css/style.css"
+            xmlns="http://javafx.com/javafx/24.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.partflow.controller.DashboardController">
+
    <children>
-      <VBox prefHeight="448.0" prefWidth="648.0" spacing="20" styleClass="mainScreen">
-         <children>
-            <BorderPane prefHeight="43.0" prefWidth="600.0">
-               <left>
-                  <Label styleClass="pageTitle" text="Dashboard" BorderPane.alignment="CENTER">
-                     <font>
-                        <Font name="Microsoft JhengHei Bold" size="24.0" />
-                     </font>
-                  </Label>
-               </left>
-            </BorderPane>
-            <HBox prefHeight="100.0" prefWidth="200.0" spacing="20">
-               <children>
-                  <VBox spacing="16" styleClass="dashboard-card">
-                     <Label text="Total Part" />
-                     <Label text="Value" />
-                  </VBox>
-                  <VBox spacing="16" styleClass="dashboard-card">
-                     <Label text="Low Stock Alert" />
-                     <Label text="Value" />
-                  </VBox>
-                  <VBox spacing="16" styleClass="dashboard-card">
-                     <Label text="Sales Today" />
-                     <Label text="Value" />
-                  </VBox>
-                  <VBox spacing="16" styleClass="dashboard-card">
-                     <Label text="Out of Stock" />
-                     <Label text="Value" />
-                  </VBox>
-               </children>
-            </HBox>
-            <HBox prefHeight="202.0" prefWidth="600.0" spacing="20">
-               <children>
-                  <VBox prefHeight="202.0" prefWidth="275.0">
-                     <children>
-                        <Label styleClass="contentTitle" text="Low Stock Parts" />
-                        <TableView prefHeight="185.0" prefWidth="311.0">
-                          <columns>
-                            <TableColumn prefWidth="154.0" text="Part" />
-                            <TableColumn prefWidth="120.0" text="Stock" />
-                          </columns>
-                        </TableView>
-                     </children>
-                  </VBox>
-                  <VBox prefHeight="202.0" prefWidth="275.0" spacing="16">
-                     <children>
-                        <Label prefHeight="22.0" prefWidth="98.0" styleClass="contentTitle" text="Sales Report" />
-                        <TableView prefHeight="156.0" prefWidth="266.0">
-                           <columns>
-                              <TableColumn prefWidth="189.0" text="Date" />
-                              <TableColumn prefWidth="85.0" text="Sales" />
-                           </columns>
-                        </TableView>
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-         </children>
+      <VBox spacing="20" AnchorPane.topAnchor="0" AnchorPane.leftAnchor="0"
+            AnchorPane.rightAnchor="0" AnchorPane.bottomAnchor="0">
+         <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+         </padding>
+
+         <!-- Header -->
+         <Label text="Dashboard" styleClass="pageTitle">
+            <font>
+               <Font name="Microsoft JhengHei Bold" size="24.0"/>
+            </font>
+         </Label>
+
+         <!-- Dashboard Cards -->
+         <HBox spacing="20">
+            <VBox styleClass="dashboard-card" spacing="10">
+               <Label text="Total Parts"/>
+               <Label fx:id="totalPartsLabel" text="0" styleClass="dashboard-value"/>
+            </VBox>
+            <VBox styleClass="dashboard-card" spacing="10">
+               <Label text="Low Stock Alert"/>
+               <Label fx:id="lowStockLabel" text="0" styleClass="dashboard-value"/>
+            </VBox>
+            <VBox styleClass="dashboard-card" spacing="10">
+               <Label text="Sales Today"/>
+               <Label fx:id="salesTodayLabel" text="0" styleClass="dashboard-value"/>
+            </VBox>
+            <VBox styleClass="dashboard-card" spacing="10">
+               <Label text="Out of Stock"/>
+               <Label fx:id="outOfStockLabel" text="0" styleClass="dashboard-value"/>
+            </VBox>
+         </HBox>
+
+         <!-- Tables Section -->
+         <HBox spacing="20">
+            <!-- Low Stock Table -->
+            <VBox spacing="10" VBox.vgrow="ALWAYS">
+               <Label text="Low Stock Parts" styleClass="contentTitle"/>
+               <TableView fx:id="lowStockTable" prefHeight="200">
+                  <columns>
+                     <TableColumn fx:id="lowStockPartColumn" text="Part" prefWidth="200"/>
+                     <TableColumn fx:id="lowStockQtyColumn" text="Stock" prefWidth="100"/>
+                  </columns>
+               </TableView>
+            </VBox>
+
+            <!-- Sales Report Table -->
+            <VBox spacing="10" VBox.vgrow="ALWAYS">
+               <Label text="Sales Report" styleClass="contentTitle"/>
+               <TableView fx:id="salesReportTable" prefHeight="200">
+                  <columns>
+                     <TableColumn fx:id="saleDateColumn" text="Date" prefWidth="200"/>
+                     <TableColumn fx:id="saleAmountColumn" text="Sales" prefWidth="100"/>
+                  </columns>
+               </TableView>
+            </VBox>
+         </HBox>
       </VBox>
    </children>
 </AnchorPane>

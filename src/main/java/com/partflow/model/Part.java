@@ -13,16 +13,19 @@ public class Part {
     private double price;
     private int quantity;
     private boolean inStock;
-    private String Vendor;
+    @ManyToOne
+    @JoinColumn(name = "vendor_id")
+    private Vendor vendor;
+    private int restockThreshold = 10; // minimum allowed quantity
+    private int restockAmount = 200;    // how many to order when below threshold
 
-
+    @Transient
+    private boolean selected; // not persisted, used for UI selection
 
     public Part() {}  // required by JPA
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
-
-
 
     public String getPartNumber() { return partNumber; }
     public void setPartNumber(String partNumber) { this.partNumber = partNumber; }
@@ -44,12 +47,35 @@ public class Part {
         this.inStock = inStock;
     }
 
-    public String getVendor() {
-        return Vendor;
+    public Vendor getVendor() {
+        return vendor;
     }
 
-    public void setVendor(String vendor) {
-        this.Vendor = vendor;
+    public void setVendor(Vendor vendor) {
+        this.vendor = vendor;
     }
 
+    public int getRestockThreshold() {
+        return restockThreshold;
+    }
+
+    public void setRestockThreshold(int restockThreshold) {
+        this.restockThreshold = restockThreshold;
+    }
+
+    public int getRestockAmount() {
+        return restockAmount;
+    }
+
+    public void setRestockAmount(int restockAmount) {
+        this.restockAmount = restockAmount;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
 }

@@ -5,12 +5,15 @@ import com.partflow.repository.SaleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class SaleService {
+
     @Autowired
     private SaleRepository saleRepository;
 
@@ -31,5 +34,18 @@ public class SaleService {
 
     public void deleteSale(Long id) {
         saleRepository.deleteById(id);
+    }
+
+    // NEW: Get sales on a specific day
+    public List<Sale> getSalesByDate(LocalDate date) {
+        LocalDateTime startOfDay = date.atStartOfDay();
+        LocalDateTime endOfDay = date.atTime(LocalTime.MAX);
+        return saleRepository.findBySaleDateBetween(startOfDay, endOfDay);
+    }
+
+    // NEW: Get recent sales within a number of days
+    public List<Sale> getRecentSales(int daysBack) {
+        LocalDateTime since = LocalDateTime.now().minusDays(daysBack);
+        return saleRepository.findBySaleDateAfter(since);
     }
 }

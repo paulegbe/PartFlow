@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PartService {
@@ -29,6 +30,22 @@ public class PartService {
     public void deletePart(Long id){
         partRepository.deleteById(id);
     }
+
+    public List<Part> checkLowStockParts() {
+        return partRepository.findAll().stream()
+                .filter(p -> p.getQuantity() < p.getRestockThreshold())
+                .collect(Collectors.toList());
+    }
+
+    public void autoRestock() {
+        List<Part> lowStockParts = checkLowStockParts();
+        for (Part part : lowStockParts) {
+            part.setQuantity(part.getQuantity() + part.getRestockAmount());
+            partRepository.save(part);
+            // optionally log or create a restock record
+        }
+    }
+
 
 
 }

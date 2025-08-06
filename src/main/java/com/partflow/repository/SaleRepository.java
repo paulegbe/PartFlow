@@ -8,8 +8,12 @@ import java.util.List;
 
 public interface SaleRepository extends JpaRepository<Sale, Long> {
 
-    List<Sale> findBySaleDate(LocalDateTime saleDate);
+    // Existing method
+    List<Sale> findByPart_PartName(String partName);
 
-    List<Sale> findByPartName(String partName);
+    // New: Fetch all sales within a date range (for today’s sales)
+    List<Sale> findBySaleDateBetween(LocalDateTime start, LocalDateTime end);
 
+    // New: Fetch all sales after a given time (for recent sales reports)
+    List<Sale> findBySaleDateAfter(LocalDateTime since);
 }

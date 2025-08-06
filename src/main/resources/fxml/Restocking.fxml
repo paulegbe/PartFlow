@@ -5,44 +5,75 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="mainScreen" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="600.0"
+            styleClass="mainScreen"
+            stylesheets="@../css/style.css"
+            xmlns="http://javafx.com/javafx/17.0.12"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.partflow.controller.RestockingController">
+
    <children>
       <VBox layoutX="3.0" layoutY="6.0" prefHeight="389.0" prefWidth="677.0">
          <children>
+            <!-- Title -->
             <Label styleClass="pageTitle" text="Restocking">
                <font>
                   <Font name="Microsoft JhengHei Bold" size="24.0" />
                </font>
             </Label>
+
+            <!-- Search Bar -->
             <HBox prefHeight="89.0" prefWidth="608.0">
                <children>
                   <BorderPane prefHeight="87.0" prefWidth="629.0">
                      <left>
-                        <TextField prefHeight="25.0" prefWidth="546.0" promptText="Search Part" BorderPane.alignment="CENTER">
+                        <TextField fx:id="searchField"
+                                   prefHeight="25.0"
+                                   prefWidth="546.0"
+                                   promptText="Search Part"
+                                   BorderPane.alignment="CENTER">
                            <BorderPane.margin>
                               <Insets right="10.0" />
-                           </BorderPane.margin></TextField>
+                           </BorderPane.margin>
+                        </TextField>
                      </left>
                      <right>
-                        <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="91.0" text="Search" BorderPane.alignment="CENTER" />
+                        <Button fx:id="searchButton"
+                                mnemonicParsing="false"
+                                prefHeight="31.0"
+                                prefWidth="91.0"
+                                text="Search"
+                                onAction="#handleSearch"
+                                BorderPane.alignment="CENTER" />
                      </right>
                   </BorderPane>
                </children>
             </HBox>
-            <TableView prefHeight="160.0" prefWidth="574.0">
-              <columns>
-                <TableColumn prefWidth="236.0" text="Parts" />
-                <TableColumn prefWidth="126.0" text="Quantity" />
-                  <TableColumn prefWidth="150.0" text="Supplier" />
-                  <TableColumn prefWidth="133.0" text="Select Part" />
-              </columns>
+
+            <!-- Table -->
+            <TableView fx:id="restockTable" prefHeight="160.0" prefWidth="574.0">
+               <columns>
+                  <TableColumn fx:id="partColumn" prefWidth="236.0" text="Parts" />
+                  <TableColumn fx:id="quantityColumn" prefWidth="126.0" text="Quantity" />
+                  <TableColumn fx:id="supplierColumn" prefWidth="150.0" text="Supplier" />
+                  <TableColumn fx:id="selectColumn" prefWidth="133.0" text="Select Part" />
+               </columns>
             </TableView>
+
+            <!-- Action Button -->
             <BorderPane prefHeight="92.0" prefWidth="590.0">
                <right>
-                  <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="155.0" text="Reorder Selected" BorderPane.alignment="CENTER" />
+                  <Button fx:id="reorderSelectedButton"
+                          mnemonicParsing="false"
+                          prefHeight="33.0"
+                          prefWidth="155.0"
+                          text="Reorder Selected"
+                          onAction="#handleReorderSelected"
+                          BorderPane.alignment="CENTER" />
                </right>
             </BorderPane>
          </children>
+
          <padding>
             <Insets bottom="20.0" left="40.0" right="40.0" top="20.0" />
          </padding>

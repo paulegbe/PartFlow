@@ -13,24 +13,27 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="941.0" prefWidth="1117.0" styleClass="mainScreen" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.partflow.controller.InventoryController">
+<AnchorPane styleClass="mainScreen" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.partflow.controller.InventoryController">
     <children>
-        <VBox prefHeight="1200.0" prefWidth="1069.0" spacing="16.0">
+        <VBox fx:id="mainVBox" spacing="16.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <!-- Header Section -->
-                <HBox prefHeight="100.0" prefWidth="900.0">
+                <HBox prefHeight="31.0" prefWidth="572.0" spacing="10.0">
                     <children>
-                        <BorderPane prefHeight="100.0" prefWidth="900.0">
+                        <BorderPane maxWidth="Infinity">
                             <left>
                                 <Label styleClass="pageTitle" text="Inventory" BorderPane.alignment="CENTER">
                                     <font>
                                         <Font name="Microsoft JhengHei Bold" size="24.0" />
                                     </font>
+                           <padding>
+                              <Insets right="340.0" />
+                           </padding>
                                 </Label>
                             </left>
-                            <right>
-                                <Button fx:id="addPartButton" mnemonicParsing="false" onAction="#handleAddPart" prefHeight="25.0" prefWidth="91.0" text="Add Parts" BorderPane.alignment="CENTER" />
-                            </right>
+                     <right>
+                                <Button fx:id="addPartButton" mnemonicParsing="false" onAction="#handleAddPart" prefHeight="31.0" prefWidth="139.0" text="Add Parts" BorderPane.alignment="CENTER" />
+                     </right>
                         </BorderPane>
                     </children>
                 </HBox>
@@ -40,39 +43,38 @@
                     <children>
                         <HBox spacing="10.0">
                             <Label text="Part Name:" />
-                            <TextField fx:id="partNameField" />
+                            <TextField fx:id="partNameField" HBox.hgrow="ALWAYS" />
                             <Label text="Part Number:" />
-                            <TextField fx:id="partNumberField" />
+                            <TextField fx:id="partNumberField" HBox.hgrow="ALWAYS" />
                             <Label text="Price:" />
-                            <TextField fx:id="priceField" />
+                            <TextField fx:id="priceField" HBox.hgrow="ALWAYS" />
                         </HBox>
                         <HBox spacing="10.0">
                             <Label text="Quantity:" />
-                            <TextField fx:id="quantityField" />
+                            <TextField fx:id="quantityField" HBox.hgrow="ALWAYS" />
                             <Label text="Vendor:" />
-                            <TextField fx:id="vendorField" />
+                            <TextField fx:id="vendorField" HBox.hgrow="ALWAYS" />
                             <CheckBox fx:id="inStockCheckBox" text="In Stock" />
                         </HBox>
                     </children>
-               <VBox.margin>
-                  <Insets top="20.0" />
-               </VBox.margin>
-               <padding>
-                  <Insets bottom="30.0" />
-               </padding>
+                    <VBox.margin>
+                        <Insets top="20.0" />
+                    </VBox.margin>
+                    <padding>
+                        <Insets bottom="30.0" />
+                    </padding>
                 </VBox>
 
                 <!-- Table Section -->
-                <TableView fx:id="partsTable" prefHeight="311.0" prefWidth="1029.0">
+                <TableView fx:id="partsTable" VBox.vgrow="ALWAYS">
                     <columns>
-                        <TableColumn fx:id="nameColumn" prefWidth="130.0" text="Part Name" />
-                        <TableColumn fx:id="priceColumn" prefWidth="154.0" text="Price" />
-                        <TableColumn fx:id="numberColumn" prefWidth="167.0" text="Part Number" />
-                        <TableColumn fx:id="quantityColumn" prefWidth="147.0" text="Quantity" />
-                        <TableColumn fx:id="statusColumn" prefWidth="117.0" text="Status" />
-                        <TableColumn fx:id="vendorColumn" prefWidth="117.0" text="Vendor" />
-                        <TableColumn fx:id="actionColumn" prefWidth="160.0" text="Actions" />
-
+                        <TableColumn fx:id="nameColumn" text="Part Name" />
+                        <TableColumn fx:id="priceColumn" text="Price" />
+                        <TableColumn fx:id="numberColumn" text="Part Number" />
+                        <TableColumn fx:id="quantityColumn" text="Quantity" />
+                        <TableColumn fx:id="statusColumn" text="Status" />
+                        <TableColumn fx:id="vendorColumn" text="Vendor" />
+                        <TableColumn fx:id="actionColumn" text="Actions" />
                     </columns>
                 </TableView>
             </children>

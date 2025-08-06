@@ -1,57 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="mainScreen"  stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="mainScreen"
+            stylesheets="@../css/style.css"
+            xmlns="http://javafx.com/javafx/24.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.partflow.controller.SalesController">
+
    <children>
-      <VBox layoutX="6.0" layoutY="6.0" prefHeight="392.0" prefWidth="579.0">
+      <VBox layoutX="6.0" layoutY="6.0" prefHeight="392.0" prefWidth="579.0" spacing="10">
          <children>
+
+            <!-- Title -->
             <Label styleClass="pageTitle" text="Sales">
                <font>
                   <Font name="Microsoft JhengHei Bold" size="24.0" />
                </font>
             </Label>
-            <HBox prefHeight="100.0" prefWidth="200.0">
-               <children>
-                  <BorderPane prefHeight="100.0" prefWidth="578.0">
-                     <right>
-                        <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="105.0" text="Record Sale" BorderPane.alignment="CENTER" />
-                     </right>
-                     <left>
-                        <TextField prefHeight="29.0" prefWidth="495.0" promptText="Search by 'Part Name'" BorderPane.alignment="CENTER">
-                           <BorderPane.margin>
-                              <Insets right="10.0" />
-                           </BorderPane.margin></TextField>
-                     </left>
-                  </BorderPane>
-               </children>
+
+            <!-- Search & Record Button Row -->
+            <HBox spacing="10">
+               <TextField fx:id="searchField"
+                          prefHeight="29.0"
+                          promptText="Search by 'Part Name'" />
+               <Button fx:id="recordSaleBtn"
+                       text="Record Sale"
+                       onAction="#handleRecordSale"
+                       prefHeight="29.0"
+                       prefWidth="120.0" />
             </HBox>
-            <TableView prefHeight="200.0" prefWidth="200.0">
-              <columns>
-                <TableColumn prefWidth="75.0" text="Date" />
-                <TableColumn prefWidth="119.0" text="Part" />
-                  <TableColumn prefWidth="123.0" text="Quantity" />
-                  <TableColumn prefWidth="123.0" text="Unit Price" />
-                  <TableColumn prefWidth="168.0" text="Total" />
-              </columns>
+
+            <!-- Sale Entry Form -->
+            <HBox spacing="10">
+               <ComboBox fx:id="partComboBox"
+                         promptText="Select Part"
+                         prefWidth="300" />
+               <TextField fx:id="quantityField"
+                          promptText="Quantity"
+                          prefWidth="100" />
+            </HBox>
+
+            <!-- Sales Table -->
+            <TableView fx:id="salesTable" prefHeight="200.0">
+               <columns>
+                  <TableColumn fx:id="colDate" prefWidth="75.0" text="Date" />
+                  <TableColumn fx:id="colPart" prefWidth="119.0" text="Part" />
+                  <TableColumn fx:id="colQuantity" prefWidth="123.0" text="Quantity" />
+                  <TableColumn fx:id="colPrice" prefWidth="123.0" text="Unit Price" />
+                  <TableColumn fx:id="colTotal" prefWidth="168.0" text="Total" />
+               </columns>
             </TableView>
+
          </children>
          <padding>
-            <Insets bottom="20.0" left="40.0" right="40.0" top="20.0" />
+            <Insets top="20.0" right="40.0" bottom="20.0" left="40.0" />
          </padding>
       </VBox>
    </children>
-   <opaqueInsets>
-      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-   </opaqueInsets>
 </AnchorPane>
