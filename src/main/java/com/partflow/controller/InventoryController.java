@@ -47,6 +47,9 @@ public class InventoryController {
     @Autowired
     private PartService partService;
 
+    @Autowired
+    private com.partflow.service.VendorService vendorService;
+
     @FXML
     public void initialize() {
         nameColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPartName()));
@@ -54,7 +57,7 @@ public class InventoryController {
         numberColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPartNumber()));
         quantityColumn.setCellValueFactory(data -> new SimpleIntegerProperty(data.getValue().getQuantity()).asObject());
         statusColumn.setCellValueFactory(data -> new SimpleBooleanProperty(data.getValue().isInStock()).asObject());
-        vendorColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getVendor()));
+        vendorColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getVendor().getName()));
 
         actionColumn.setCellFactory(col -> new TableCell<Part, Void>() {
             private final Button editBtn = new Button("Edit");
@@ -99,9 +102,8 @@ public class InventoryController {
             newPart.setQuantity(Integer.parseInt(quantityField.getText()));
             newPart.setInStock(inStockCheckBox.isSelected());
 
-
-
-            newPart.setVendor(vendorField.getText());
+            com.partflow.model.Vendor vendor = vendorService.findByName(vendorField.getText());
+            newPart.setVendor(vendor);
 
             Part savedPart = partService.savePart(newPart);
             partList.add(savedPart);
@@ -132,7 +134,8 @@ public class InventoryController {
         part.setPrice(Double.parseDouble(priceField.getText()));
         part.setQuantity(Integer.parseInt(quantityField.getText()));
         part.setInStock(inStockCheckBox.isSelected());
-        part.setVendor(vendorField.getText());
+        com.partflow.model.Vendor vendor = vendorService.findByName(vendorField.getText());
+        part.setVendor(vendor);
     }
 
     private void populateFormForEdit(Part part) {
@@ -141,7 +144,7 @@ public class InventoryController {
         priceField.setText(String.valueOf(part.getPrice()));
         quantityField.setText(String.valueOf(part.getQuantity()));
         inStockCheckBox.setSelected(part.isInStock());
-        vendorField.setText(part.getVendor());
+        vendorField.setText(part.getVendor().getName());
 
         editingPart = part;
         addPartButton.setText("Save Changes");
