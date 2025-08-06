@@ -7,32 +7,31 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 
-<VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="200.0" spacing="10.0" styleClass="sidebar" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.partflow.controller.SidebarController">
+<VBox alignment="TOP_CENTER" prefWidth="220.0" spacing="15.0" styleClass="sidebar" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.partflow.controller.SidebarController">
     <padding>
-        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+        <Insets bottom="20.0" left="15.0" right="15.0" top="20.0" />
     </padding>
    <children>
-      <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/logo_white.png" />
          </image>
          <VBox.margin>
-            <Insets bottom="20.0" top="10.0" />
+            <Insets bottom="30.0" top="10.0" />
          </VBox.margin>
       </ImageView>
-      <ToggleButton mnemonicParsing="false" onAction="#goToDashboard" prefHeight="40.0" prefWidth="180.0" styleClass="sidebar-button" text="Dashboard">
+      <ToggleButton mnemonicParsing="false" onAction="#goToDashboard" maxWidth="Infinity" styleClass="sidebar-button" text="Dashboard">
          <toggleGroup>
             <ToggleGroup fx:id="sidebarToggleGroup" />
          </toggleGroup>
       </ToggleButton>
-      <ToggleButton mnemonicParsing="false" onAction="#goToInventory" prefHeight="40.0" prefWidth="180.0" styleClass="sidebar-button" text="Inventory" toggleGroup="$sidebarToggleGroup" />
-      <ToggleButton mnemonicParsing="false" onAction="#goToSales" prefHeight="40.0" prefWidth="180.0" styleClass="sidebar-button" text="Sales" toggleGroup="$sidebarToggleGroup" />
-      <ToggleButton mnemonicParsing="false" onAction="#goToRestocking" prefHeight="40.0" prefWidth="180.0" styleClass="sidebar-button" text="Restocking" toggleGroup="$sidebarToggleGroup" />
-      <ToggleButton mnemonicParsing="false" onAction="#goToVendors" prefHeight="40.0" prefWidth="180.0" styleClass="sidebar-button" text="Vendors" toggleGroup="$sidebarToggleGroup" />
-      <ToggleButton mnemonicParsing="false" onAction="#goToReports" prefHeight="40.0" prefWidth="180.0" styleClass="sidebar-button" text="Reports" toggleGroup="$sidebarToggleGroup" />
+      <ToggleButton mnemonicParsing="false" onAction="#goToInventory" maxWidth="Infinity" styleClass="sidebar-button" text="Inventory" toggleGroup="$sidebarToggleGroup" />
+      <ToggleButton mnemonicParsing="false" onAction="#goToSales" maxWidth="Infinity" styleClass="sidebar-button" text="Sales" toggleGroup="$sidebarToggleGroup" />
+      <ToggleButton mnemonicParsing="false" onAction="#goToRestocking" maxWidth="Infinity" styleClass="sidebar-button" text="Restocking" toggleGroup="$sidebarToggleGroup" />
+      <ToggleButton mnemonicParsing="false" onAction="#goToVendors" maxWidth="Infinity" styleClass="sidebar-button" text="Vendors" toggleGroup="$sidebarToggleGroup" />
+      <ToggleButton mnemonicParsing="false" onAction="#goToReports" maxWidth="Infinity" styleClass="sidebar-button" text="Reports" toggleGroup="$sidebarToggleGroup" />
       <Region VBox.vgrow="ALWAYS" />
       <Label text="PartFlow v0.0.1" styleClass="version-label" />
    </children>
