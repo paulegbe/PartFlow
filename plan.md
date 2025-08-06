@@ -214,7 +214,7 @@ PartFlow is a desktop application designed to streamline and automate operations
 ## Implementation Timeline
 
 ### **Week 1: Data Model & Backend**
-admin  Create RestockOrder and RestockOrderItem entities
+- [x] Create RestockOrder and RestockOrderItem entities
 - [x] Implement repositories and services
 - [x] Add database migrations
 - [ ] Unit tests for new functionality
@@ -224,6 +224,13 @@ admin  Create RestockOrder and RestockOrderItem entities
 - [ ] Add order creation interface
 - [ ] Implement order management views
 - [ ] Add status tracking UI
+
+### **UI Improvements (Completed)**
+- [x] Fixed sidebar UI layout and styling
+- [x] Created modern, industry-standard login screen
+- [x] Improved window sizing and resizing behavior
+- [x] Enhanced visual design with gradients and modern styling
+- [x] Added proper CSS classes for consistent theming
 
 ### **Week 3: Business Logic**
 - [ ] Implement RestockOrderService

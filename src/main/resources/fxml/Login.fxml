@@ -7,37 +7,106 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.FontWeight?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="mainScreen" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.partflow.controller.LoginController">
+<VBox alignment="CENTER" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to bottom right, #667eea 0%, #764ba2 100%);" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.partflow.controller.LoginController">
    <children>
-      <VBox alignment="CENTER" layoutX="200.0" layoutY="100.0" prefHeight="200.0" prefWidth="200.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox alignment="CENTER" spacing="60.0">
          <children>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../assets/logo_blue.png" />
-               </image>
-            </ImageView>
-            <Label styleClass="pageTitle" text="PartFlow Login">
-               <font>
-                  <Font name="System Bold" size="24.0" />
-               </font>
-            </Label>
-            <VBox alignment="CENTER" maxWidth="300.0" spacing="10.0">
+            <!-- Left side - Logo and branding -->
+            <VBox alignment="CENTER" prefHeight="400.0" prefWidth="350.0" style="-fx-background-color: rgba(255, 255, 255, 0.1); -fx-background-radius: 20;" spacing="20.0">
                <children>
-                  <TextField fx:id="usernameField" promptText="Username" />
-                  <PasswordField fx:id="passwordField" promptText="Password" />
-                  <Button onAction="#handleLogin" prefHeight="30.0" prefWidth="200.0" text="Login" />
-                  <Label fx:id="errorMessageLabel" styleClass="error-message" textFill="RED" />
+                  <ImageView fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../assets/logo_white.png" />
+                     </image>
+                  </ImageView>
+                  <Label style="-fx-text-fill: white; -fx-font-size: 28px; -fx-font-weight: bold;" text="PartFlow">
+                     <font>
+                        <Font name="System Bold" size="28.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-text-fill: rgba(255, 255, 255, 0.8); -fx-font-size: 16px;" text="Inventory Management System">
+                     <font>
+                        <Font name="System" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-text-fill: rgba(255, 255, 255, 0.7); -fx-font-size: 14px;" text="Streamline your parts business">
+                     <font>
+                        <Font name="System" size="14.0" />
+                     </font>
+                  </Label>
                </children>
+               <padding>
+                  <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+               </padding>
+            </VBox>
+            
+            <!-- Right side - Login form -->
+            <VBox alignment="CENTER" prefHeight="400.0" prefWidth="350.0" style="-fx-background-color: white; -fx-background-radius: 20;" spacing="25.0">
+               <children>
+                  <Label style="-fx-text-fill: #333333; -fx-font-size: 24px; -fx-font-weight: bold;" text="Welcome Back">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label style="-fx-text-fill: #666666; -fx-font-size: 14px;" text="Sign in to your account">
+                     <font>
+                        <Font name="System" size="14.0" />
+                     </font>
+                  </Label>
+                  
+                  <VBox alignment="CENTER" maxWidth="280.0" spacing="15.0">
+                     <children>
+                        <VBox spacing="5.0">
+                           <children>
+                              <Label style="-fx-text-fill: #333333; -fx-font-size: 12px; -fx-font-weight: bold;" text="Username">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="usernameField" promptText="Enter your username" styleClass="login-text-field" />
+                           </children>
+                        </VBox>
+                        
+                        <VBox spacing="5.0">
+                           <children>
+                              <Label style="-fx-text-fill: #333333; -fx-font-size: 12px; -fx-font-weight: bold;" text="Password">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <PasswordField fx:id="passwordField" promptText="Enter your password" styleClass="login-text-field" />
+                           </children>
+                        </VBox>
+                        
+                        <Button onAction="#handleLogin" prefHeight="45.0" prefWidth="280.0" styleClass="login-button" text="Sign In">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
+                        
+                        <Label fx:id="errorMessageLabel" styleClass="error-message" text="" />
+                     </children>
+                  </VBox>
+                  
+                  <Label style="-fx-text-fill: #999999; -fx-font-size: 11px;" text="© 2024 PartFlow. All rights reserved.">
+                     <font>
+                        <Font name="System" size="11.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+               </padding>
             </VBox>
          </children>
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </padding>
-      </VBox>
+      </HBox>
    </children>
-</AnchorPane>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+</VBox>

@@ -44,8 +44,12 @@ public class LoginController {
                 Parent root = loader.load();
 
                 Stage stage = (Stage) usernameField.getScene().getWindow();
+                stage.setTitle("PartFlow - Inventory Management System");
                 stage.setScene(new Scene(root));
-                stage.setMaximized(true);
+                stage.setMinWidth(1200);
+                stage.setMinHeight(700);
+                stage.setResizable(true);
+                stage.centerOnScreen();
                 stage.show();
             } catch (IOException e) {
                 e.printStackTrace();

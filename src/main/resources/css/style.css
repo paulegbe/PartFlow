@@ -125,3 +125,37 @@
     -fx-border-radius: 4;
 }
 
+/* Login screen specific styles */
+.login-button {
+    -fx-background-color: #667eea;
+    -fx-background-radius: 8;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+}
+
+.login-button:hover {
+    -fx-background-color: #5a6fd8;
+}
+
+.login-text-field {
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: #e1e5e9;
+    -fx-border-width: 1;
+    -fx-padding: 12;
+    -fx-font-size: 14px;
+}
+
+.login-text-field:focused {
+    -fx-border-color: #667eea;
+    -fx-border-width: 2;
+}
+
+.error-message {
+    -fx-text-fill: #e74c3c;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
