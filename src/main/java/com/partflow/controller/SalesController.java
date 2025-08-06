@@ -27,8 +27,8 @@ public class SalesController {
     @FXML private TableColumn<Sale, Double> colTotal;
     @FXML private TableColumn<Sale, LocalDateTime> colDate;
 
-    @Autowired private PartRepository partRepository;
-    @Autowired private SaleRepository saleRepository;
+    @Autowired private com.partflow.service.PartService partService;
+    @Autowired private com.partflow.service.SaleService saleService;
 
     private ObservableList<Sale> saleData;
 
@@ -53,7 +53,7 @@ public class SalesController {
         colDate.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getSaleDate()));
 
         // Load existing sales
-        saleData = FXCollections.observableArrayList(saleRepository.findAll());
+        saleData = FXCollections.observableArrayList(saleService.getAllSales());
         salesTable.setItems(saleData);
     }
 
@@ -85,7 +85,7 @@ public class SalesController {
 
         // Update inventory
         selectedPart.setQuantity(selectedPart.getQuantity() - qty);
-        partRepository.save(selectedPart);
+        partService.savePart(selectedPart);
 
         // Create sale
         Sale sale = new Sale();
@@ -95,7 +95,7 @@ public class SalesController {
         sale.setTotalPrice(qty * selectedPart.getPrice());
         sale.setSaleDate(LocalDateTime.now());
 
-        saleRepository.save(sale);
+        saleService.saveSale(sale);
         saleData.add(sale);
 
         quantityField.clear();
