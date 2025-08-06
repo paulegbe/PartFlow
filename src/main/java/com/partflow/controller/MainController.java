@@ -1,8 +1,6 @@
 package com.partflow.controller;
 
 import com.partflow.config.ApplicationContextProvider;
-
-import com.partflow.config.ApplicationContextProvider;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

@@ -35,7 +35,7 @@ public class SalesController {
     @FXML
     public void initialize() {
         // Load parts
-        partComboBox.setItems(FXCollections.observableArrayList(partRepository.findAll()));
+        partComboBox.setItems(FXCollections.observableArrayList(partService.getAllParts()));
         partComboBox.setCellFactory(list -> new ListCell<>() {
             @Override
             protected void updateItem(Part item, boolean empty) {
@@ -53,7 +53,7 @@ public class SalesController {
         colDate.setCellValueFactory(data -> new SimpleObjectProperty<>(data.getValue().getSaleDate()));
 
         // Load existing sales
-        saleData = FXCollections.observableArrayList(saleService.getAllSales());
+                        saleData = FXCollections.observableArrayList(saleService.getAllSales());
         salesTable.setItems(saleData);
     }
 
@@ -85,7 +85,7 @@ public class SalesController {
 
         // Update inventory
         selectedPart.setQuantity(selectedPart.getQuantity() - qty);
-        partService.savePart(selectedPart);
+                partService.savePart(selectedPart);
 
         // Create sale
         Sale sale = new Sale();
