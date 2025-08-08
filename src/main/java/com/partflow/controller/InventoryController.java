@@ -114,6 +114,9 @@ public class InventoryController {
     @FXML
     public void handleAddPart() {
         try {
+            if (!validatePartForm()) {
+                return;
+            }
             if (editingPart == null) {
                 // Adding new part
                 Part newPart = new Part();
@@ -182,5 +185,40 @@ public class InventoryController {
         alert.setTitle(title);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+
+    private boolean validatePartForm() {
+        String name = partNameField.getText() == null ? "" : partNameField.getText().trim();
+        String number = partNumberField.getText() == null ? "" : partNumberField.getText().trim();
+        String priceText = priceField.getText() == null ? "" : priceField.getText().trim();
+        String qtyText = quantityField.getText() == null ? "" : quantityField.getText().trim();
+
+        if (name.isEmpty() || number.isEmpty() || priceText.isEmpty() || qtyText.isEmpty()) {
+            showAlert("Validation Error", "All fields are required.");
+            return false;
+        }
+        try {
+            double price = Double.parseDouble(priceText);
+            if (price < 0) {
+                showAlert("Validation Error", "Price cannot be negative.");
+                return false;
+            }
+        } catch (NumberFormatException ex) {
+            showAlert("Validation Error", "Price must be a valid number.");
+            return false;
+        }
+        try {
+            int qty = Integer.parseInt(qtyText);
+            if (qty < 0) {
+                showAlert("Validation Error", "Quantity cannot be negative.");
+                return false;
+            }
+        } catch (NumberFormatException ex) {
+            showAlert("Validation Error", "Quantity must be a whole number.");
+            return false;
+        }
+        // Vendor selection optional; if required, uncomment:
+        // if (vendorComboBox.getValue() == null) { showAlert("Validation Error", "Please select a vendor."); return false; }
+        return true;
     }
 }

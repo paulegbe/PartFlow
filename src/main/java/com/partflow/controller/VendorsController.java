@@ -67,11 +67,14 @@ public class VendorsController {
         if (query.isEmpty()) {
             vendorList.setAll(vendorRepository.findAll());
         } else {
-            Vendor matchByName = vendorRepository.findByName(query);
-            Vendor matchByContact = vendorRepository.findByContactPerson(query);
             vendorList.clear();
-            if (matchByName != null) vendorList.add(matchByName);
-            else if (matchByContact != null) vendorList.add(matchByContact);
+            // Name contains (case-insensitive)
+            vendorList.addAll(vendorRepository.findByNameContainingIgnoreCase(query));
+            // Also consider exact match on contact person if not already present
+            Vendor matchByContact = vendorRepository.findByContactPerson(query);
+            if (matchByContact != null && vendorList.stream().noneMatch(v -> v.getId().equals(matchByContact.getId()))) {
+                vendorList.add(matchByContact);
+            }
         }
     }
 
@@ -96,6 +99,11 @@ public class VendorsController {
                 // Basic email validation
                 if (!email.matches(".+@.+\\..+")) {
                     showAlert("Validation Error", "Invalid email format.");
+                    return;
+                }
+                // Basic phone validation (allows +, digits, spaces, dashes, parentheses)
+                if (!phone.matches("^[+\\d][\\d\\s\\-()]{6,}$")) {
+                    showAlert("Validation Error", "Invalid phone format.");
                     return;
                 }
 
