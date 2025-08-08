@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import com.partflow.util.UIUtils;
 
 @Component
 public class VendorsController {
@@ -45,20 +46,15 @@ public class VendorsController {
                 editBtn.setOnAction(e -> editVendor(getTableView().getItems().get(getIndex())));
                 deleteBtn.setOnAction(e -> {
                     Vendor selected = getTableView().getItems().get(getIndex());
-                    Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
-                    confirm.setTitle("Delete Vendor");
-                    confirm.setHeaderText(null);
-                    confirm.setContentText("Are you sure you want to delete '" + selected.getName() + "'? This action cannot be undone.");
-                    confirm.showAndWait().ifPresent(btn -> {
-                        if (btn == ButtonType.OK) {
-                            try {
-                                vendorRepository.deleteById(selected.getId());
-                                vendorList.remove(selected);
-                            } catch (Exception ex) {
-                                showAlert("Delete Error", "Cannot delete this vendor. Ensure no parts depend on it.");
-                            }
+                    boolean ok = UIUtils.confirm("Delete Vendor", "Are you sure you want to delete '" + selected.getName() + "'? This action cannot be undone.");
+                    if (ok) {
+                        try {
+                            vendorRepository.deleteById(selected.getId());
+                            vendorList.remove(selected);
+                        } catch (Exception ex) {
+                            UIUtils.showError("Delete Error", "Cannot delete this vendor. Ensure no parts depend on it.");
                         }
-                    });
+                    }
                 });
             }
 
@@ -105,17 +101,17 @@ public class VendorsController {
                 String email = parts[3].trim();
 
                 if (name.isEmpty() || contactPerson.isEmpty() || phone.isEmpty() || email.isEmpty()) {
-                    showAlert("Validation Error", "All fields must be filled.");
+                    UIUtils.showError("Validation Error", "All fields must be filled.");
                     return;
                 }
                 // Basic email validation
                 if (!email.matches(".+@.+\\..+")) {
-                    showAlert("Validation Error", "Invalid email format.");
+                    UIUtils.showError("Validation Error", "Invalid email format.");
                     return;
                 }
                 // Basic phone validation (allows +, digits, spaces, dashes, parentheses)
                 if (!phone.matches("^[+\\d][\\d\\s\\-()]{6,}$")) {
-                    showAlert("Validation Error", "Invalid phone format.");
+                    UIUtils.showError("Validation Error", "Invalid phone format.");
                     return;
                 }
 
@@ -127,7 +123,7 @@ public class VendorsController {
                 Vendor saved = vendorService.saveVendor(vendor);
                 vendorList.add(saved);
             } else {
-                showAlert("Invalid input format. Please use: Name, Contact Person, Phone, Email");
+                UIUtils.showError("Validation Error", "Invalid input format. Please use: Name, Contact Person, Phone, Email");
             }
         });
     }
@@ -146,15 +142,15 @@ public class VendorsController {
                 String newEmail = parts[3].trim();
 
                 if (newName.isEmpty() || newContact.isEmpty() || newPhone.isEmpty() || newEmail.isEmpty()) {
-                    showAlert("Validation Error", "All fields must be filled.");
+                    UIUtils.showError("Validation Error", "All fields must be filled.");
                     return;
                 }
                 if (!newEmail.matches(".+@.+\\..+")) {
-                    showAlert("Validation Error", "Invalid email format.");
+                    UIUtils.showError("Validation Error", "Invalid email format.");
                     return;
                 }
                 if (!newPhone.matches("^[+\\d][\\d\\s\\-()]{6,}$")) {
-                    showAlert("Validation Error", "Invalid phone format.");
+                    UIUtils.showError("Validation Error", "Invalid phone format.");
                     return;
                 }
 
@@ -165,22 +161,11 @@ public class VendorsController {
                 vendorRepository.save(vendor);
                 vendorTable.refresh();
             } else {
-                showAlert("Invalid input format.");
+                UIUtils.showError("Validation Error", "Invalid input format.");
             }
         });
     }
 
-    private void showAlert(String msg) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setContentText(msg);
-        alert.showAndWait();
-    }
-
-    private void showAlert(String title, String content) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
-        alert.setContentText(content);
-        alert.showAndWait();
-    }
+    private void showAlert(String msg) { UIUtils.showError("Error", msg); }
+    private void showAlert(String title, String content) { UIUtils.showError(title, content); }
 }
