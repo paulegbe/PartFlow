@@ -82,4 +82,10 @@ public class SidebarController {
             e.printStackTrace();
         }
     }
+
+    // Backward compatibility with FXML that uses onAction="#logout"
+    @FXML
+    public void logout() {
+        handleLogout();
+    }
 }
