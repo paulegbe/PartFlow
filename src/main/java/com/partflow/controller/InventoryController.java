@@ -28,7 +28,7 @@ public class InventoryController {
     @FXML private TextField partNumberField;
     @FXML private TextField priceField;
     @FXML private TextField quantityField;
-    @FXML private TextField vendorField;
+    @FXML private javafx.scene.control.ComboBox<Vendor> vendorComboBox;
     @FXML private CheckBox inStockCheckBox;
     @FXML private TableView<Part> partsTable;
     @FXML private Button addPartButton;
@@ -42,7 +42,8 @@ public class InventoryController {
     @FXML private TableColumn<Part, String> vendorColumn;
     @FXML private TableColumn<Part, Void> actionColumn;
 
-    private ObservableList<Part> partList;
+    private ObservableList<Part> masterPartList;
+    private ObservableList<Part> filteredPartList;
     private Part editingPart = null;
 
     @Autowired
@@ -50,6 +51,8 @@ public class InventoryController {
 
     @Autowired
     private com.partflow.service.VendorService vendorService;
+
+    @FXML private TextField searchField;
 
     @FXML
     public void initialize() {
@@ -79,7 +82,8 @@ public class InventoryController {
                         Part selected = getTableView().getItems().get(getIndex());
                         try {
                             partService.deletePart(selected.getId());
-                            partList.remove(selected);
+                            masterPartList.remove(selected);
+                            handleSearch();
                         } catch (Exception ex) {
                             showAlert("Delete Error", "Cannot delete this part because it has associated sales records. Please delete the sales first.");
                         }
@@ -93,8 +97,13 @@ public class InventoryController {
                 }
             });
 
-            partList = FXCollections.observableArrayList(partService.getAllParts());
-            partsTable.setItems(partList);
+            // Populate vendors into combo box
+            vendorComboBox.setItems(FXCollections.observableArrayList(vendorService.getAllVendors()));
+
+            // Load parts and setup filtering lists
+            masterPartList = FXCollections.observableArrayList(partService.getAllParts());
+            filteredPartList = FXCollections.observableArrayList(masterPartList);
+            partsTable.setItems(filteredPartList);
             
         } catch (Exception e) {
             System.err.println("Error initializing Inventory view: " + e.getMessage());
@@ -110,7 +119,8 @@ public class InventoryController {
                 Part newPart = new Part();
                 setPartFields(newPart);
                 Part saved = partService.savePart(newPart);
-                partList.add(saved);
+                masterPartList.add(saved);
+                handleSearch();
             } else {
                 // Editing existing part
                 setPartFields(editingPart);
@@ -132,8 +142,7 @@ public class InventoryController {
         part.setPrice(Double.parseDouble(priceField.getText()));
         part.setQuantity(Integer.parseInt(quantityField.getText()));
         part.setInStock(inStockCheckBox.isSelected());
-        com.partflow.model.Vendor vendor = vendorService.findByName(vendorField.getText());
-        part.setVendor(vendor);
+        part.setVendor(vendorComboBox.getValue());
     }
 
     private void populateFormForEdit(Part part) {
@@ -142,7 +151,7 @@ public class InventoryController {
         priceField.setText(String.valueOf(part.getPrice()));
         quantityField.setText(String.valueOf(part.getQuantity()));
         inStockCheckBox.setSelected(part.isInStock());
-        vendorField.setText(part.getVendor() != null ? part.getVendor().getName() : "");
+        vendorComboBox.setValue(part.getVendor());
 
         editingPart = part;
         addPartButton.setText("Save Changes");
@@ -154,9 +163,18 @@ public class InventoryController {
         partNumberField.clear();
         priceField.clear();
         quantityField.clear();
-        vendorField.clear();
+        vendorComboBox.getSelectionModel().clearSelection();
         inStockCheckBox.setSelected(false);
         addPartButton.setText("Add Parts");
+    }
+
+    @FXML
+    public void handleSearch() {
+        String searchText = searchField.getText() == null ? "" : searchField.getText().toLowerCase();
+        filteredPartList.setAll(masterPartList.filtered(part ->
+                part.getPartName().toLowerCase().contains(searchText) ||
+                part.getPartNumber().toLowerCase().contains(searchText)
+        ));
     }
 
     private void showAlert(String title, String content) {

@@ -1,79 +1,154 @@
-## PartFlow Application Development Plan
+## PartFlow Modernization Plan (UI/UX + Functionality)
 
-**Overall Goal:** Enhance the PartFlow application with improved functionality, a modern UI/UX, and robust features for efficient inventory and sales management.
+### Vision
+- Build a fast, reliable desktop app with a minimalist, modern UI that’s easy to learn and efficient for daily use.
+- Prioritize clarity, consistency, and performance; reduce visual noise and cognitive load.
 
-### Phased Approach:
+### Design Principles
+- Minimalist layout, ample whitespace, clear visual hierarchy
+- Consistent patterns and naming, predictable navigation
+- Accessibility (keyboard support, contrast, focus states)
+- Responsive layouts for small/large windows
+- Clear error and loading states; optimistic UI where safe
 
-**Phase 1: UI/UX Overhaul (Current Focus)**
-*   **Objective:** Implement a consistent, modern, and intuitive user interface across the entire application.
-*   **Tasks:**
-    *   **Global Styles (`style.css`):**
-        *   Refine color palette, typography, and spacing for a cohesive look.
-        *   Implement consistent styling for all common UI elements (buttons, text fields, labels, tables, etc.).
-        *   Ensure responsiveness across different window sizes.
-    *   **Login Screen (`Login.fxml`):**
-        *   Apply new global styles.
-        *   Improve layout and visual appeal.
-    *   **Sidebar (`Sidebar.fxml`):**
-        *   Apply new global styles.
-        *   Ensure consistent navigation button styling and active states.
-    *   **Dashboard (`Dashboard.fxml`):**
-        *   Apply new global styles to cards, labels, and tables.
-        *   Enhance visual presentation of key metrics.
-    *   **Inventory Management (`Inventory.fxml`):**
-        *   Apply new global styles to input forms, buttons, and tables.
-        *   Improve layout for better usability.
-    *   **Sales Management (`Sales.fxml`):**
-        *   Apply new global styles to input forms, buttons, and tables.
-        *   Optimize layout for efficient sale recording.
-    *   **Restocking Management (`Restocking.fxml`):**
-        *   Apply new global styles to search bars, tables, and buttons.
-        *   Improve clarity of restocking information.
-    *   **Vendor Management (`Vendors.fxml`):**
-        *   Apply new global styles to input forms, tables, and buttons.
-        *   Streamline vendor information display.
-    *   **Reports (`Reports.fxml`):**
-        *   Apply new global styles to report generation controls and display area.
-        *   Improve readability of generated reports.
+## UI/UX Redesign
 
-**Phase 2: Core Functionality Enhancements**
-*   **Objective:** Implement key features to enhance the core inventory and sales management capabilities.
-*   **Tasks:**
-    *   **Part Management:**
-        *   Implement functionality to edit and delete parts.
-        *   Add validation for part input fields (e.g., price must be numeric, quantity non-negative).
-        *   Implement search and filter capabilities for parts.
-    *   **Vendor Management:**
-        *   Implement functionality to edit and delete vendors.
-        *   Add validation for vendor input fields.
-        *   Implement search and filter capabilities for vendors.
-    *   **Sales Management:**
-        *   Implement functionality to view sales history in detail.
-        *   Add ability to edit or void sales (with appropriate permissions/logging).
-        *   Implement sales reporting with customizable date ranges.
-    *   **Restocking:**
-        *   Implement a proper restock order creation and tracking system.
-        *   Generate purchase orders for selected restock items.
-        *   Update inventory automatically upon receipt of restock orders.
-    *   **User Management:**
-        *   Implement user creation, editing, and deletion (for admin users).
-        *   Implement role-based access control (e.g., admin, sales, inventory).
+### 1) Visual Language
+- Color palette (neutral, calm, high-contrast where needed)
+  - Primary: Indigo 600 `#4F46E5` (hover: `#4338CA`)
+  - Accent: Emerald 500 `#10B981`
+  - Neutral BG: `#F8FAFC` / Surfaces: `#FFFFFF` / Borders: `#E5E7EB`
+  - Text: `#111827` (primary), `#6B7280` (secondary), Error `#DC2626`
+- Typography: Segoe UI (Windows default) or Inter; sizes: 12/14/16/18/24/28
+- Spacing scale: 4/8/12/16/20/24 px; use consistently in FXML and CSS
+- Elevation: subtle shadows only for dialogs/menus; avoid heavy borders
 
-**Phase 3: Advanced Features & Polish**
-*   **Objective:** Introduce advanced features and polish the application for a production-ready state.
-*   **Tasks:**
-    *   **Notifications & Alerts:**
-        *   Implement real-time notifications for low stock, new sales, etc.
-        *   Configurable alert thresholds.
-    *   **Data Visualization:**
-        *   Integrate charts and graphs on the dashboard for sales trends, inventory levels, etc.
-    *   **Export/Import:**
-        *   Allow exporting data to common formats (CSV, PDF).
-        *   Allow importing data from CSV for initial setup.
-    *   **Settings & Configuration:**
-        *   Implement a settings screen for application-wide configurations (e.g., currency, tax rates).
-    *   **Error Handling & Logging:**
-        *   Improve user-friendly error messages.
-        *   Implement comprehensive logging for debugging and auditing.
-    *   **Deployment:**
-        *   Package the application for easy deployment (e.g., native installer).
+### 2) Layout & Navigation
+- App shell: persistent left sidebar with active state, content area on the right
+- Top content header with page title and primary action(s)
+- Consistent page templates: header → filters/actions → table/cards → pagination
+- Keyboard shortcuts for major screens (Alt+1 Dashboard, Alt+2 Inventory, …)
+- Ensure logout replaces the entire Scene (no sidebar remnants)
+
+### 3) Components (JavaFX CSS + FXML)
+- Buttons: primary, secondary, subtle; clear hover/disabled states
+- Inputs: text, number, combo; validation states (success/error/helper text)
+- TableView: dense and comfortable modes, column alignment, sticky header
+- Dialogs: modern modal for create/edit; avoid comma-separated text inputs
+- Toasts/inline alerts: success/error/info patterns
+- Empty states and skeleton loaders for data-heavy views
+
+### 4) Theming & Dark Mode (Phase 2)
+- Centralize tokens in `style.css`; class-based theming for light/dark
+- Optional dark palette: Background `#0B1220`, Surfaces `#111827`, Text `#E5E7EB`, Primary `#6366F1`
+
+### 5) Accessibility
+- Focus outlines, logical tab order, ARIA-like semantics where possible
+- Color contrast AA for text and interactive elements
+
+## Functional Enhancements
+
+### 1) Authentication & Authorization
+- Passwords: BCrypt hashing; remove plaintext handling
+- Roles: `ADMIN`, `STAFF`, `VIEWER`; restrict menus/actions by role
+- Session/logout: clear state, return to login, hide sidebar/navigation
+
+### 2) Inventory Management
+- CRUD with form dialogs (Create/Edit); validation (numeric price/qty, non-negative)
+- SKU/Part Number uniqueness; vendor association via ComboBox
+- Search, sort, filter, pagination for large datasets
+- Bulk import/export (CSV); optional barcode/QR later
+- Low stock alerts with thresholds; quick actions to create restock orders
+
+### 3) Vendor Management
+- CRUD with validation (email/phone), deduplication by name/contact
+- Search/filter by name/contact; pagination
+- Link vendor to parts; display vendor health (fulfillment rate later)
+
+### 4) Sales Management
+- Create sale: select part(s), quantity, auto-calc totals; decrement stock
+- Edit/void sale with audit trail (role-restricted)
+- Receipt generation (printable/PDF)
+
+### 5) Restocking
+- Restock Order lifecycle: Draft → Sent → Partially Received → Completed → Cancelled
+- Generate PO (printable/PDF); email to vendor (future)
+- Receive items: update stock and costs; reconcile partial receipts
+- Suggested restock list from low-stock thresholds
+
+### 6) Reporting & Dashboard
+- Time-based filters: today/week/month/custom; CSV/PDF exports
+- KPIs on dashboard: Inventory value, Low-stock count, Sales (period), Top items
+- Charts (later): sales trend, stock turnover; keep minimal and readable
+
+### 7) Data & Integrity
+- Entity constraints: not-null, unique indexes (part number, vendor name)
+- Database migrations via Flyway/Liquibase (Phase 2)
+- Seed data for demo and testing paths
+
+### 8) Error Handling & Observability
+- Centralized exception handling with user-friendly alerts
+- Logging strategy (INFO for business flow, DEBUG for development)
+- Optional audit log for sensitive changes (user/role, void sales)
+
+### 9) Performance
+- Table pagination and server-side filtering (where needed)
+- Proper repository queries and indexes; avoid N+1 fetches
+
+### 10) Testing & Quality
+- Unit tests: services, repositories, validators
+- Integration tests: Spring Boot + H2
+- UI smoke tests (optional) with TestFX
+- Pre-commit checks: format/lint/test (via CI)
+
+### 11) Build, Packaging, CI/CD
+- Java 21 + Spring Boot + JavaFX
+- Packaging: jlink/jpackage for platform-specific installers
+- GitHub Actions: build, test, package artifacts on push
+
+## Roadmap (Milestones & Acceptance)
+
+### Milestone 1: Stabilize Current App (1–2 days)
+- Fix navigation and logout scene swap issues
+- Align FXML ids with controllers; remove legacy handlers
+- Basic validation on Inventory/Vendors forms
+- Acceptance: app builds, runs; sidebar/nav stable; no obvious runtime errors
+
+### Milestone 2: Minimalist UI Refresh (3–5 days)
+- Implement new palette, spacing, and typography in `style.css`
+- Update `Login.fxml`, `Sidebar.fxml`, `Dashboard.fxml` to template
+- Introduce modal forms for create/edit in Inventory/Vendors
+- Acceptance: visually consistent, clear states, accessible focus/contrast
+
+### Milestone 3: Functional Completeness (5–8 days)
+- Inventory/Vendors CRUD finalized with validation + search/filter/pagination
+- Sales flow with stock decrement; basic reports export CSV
+- Restock order draft → receive flow; low-stock suggestions
+- Acceptance: end-to-end flows tested with sample data
+
+### Milestone 4: Security & Quality (3–5 days)
+- BCrypt passwords, roles/permissions, restricted menus/actions
+- Add unit/integration tests; CI pipeline
+- Acceptance: all tests green, role-based UX differences verified
+
+### Milestone 5: Polish & Packaging (2–4 days)
+- Error/empty/loading states; toasts; minor UX refinements
+- Optional dark mode; jpackage installers; release notes
+- Acceptance: packaged app install/run; UX meets minimalist goals
+
+## Deliverables
+- Updated FXML/CSS implementing minimalist UI
+- Validated CRUD flows for Inventory, Vendors, Sales, Restocking
+- Reporting exports; dashboard KPIs
+- Auth with roles; tests; CI pipeline; packaging artifacts
+
+## Risks & Mitigations
+- Binary DB in VCS: consider migrating to migrations + seed data
+- Mixed FXML/controller patterns: standardize injection, fx:ids, handlers
+- Scope creep: adhere to milestones; defer advanced charts/emails to later
+
+## Success Criteria
+- Users can complete daily tasks quickly with fewer clicks
+- UI is visually clean, consistent, accessible, and responsive
+- Core flows (Inventory, Vendors, Sales, Restocking, Reports) reliable
+- Build, tests, and packaged releases are automated and reproducible

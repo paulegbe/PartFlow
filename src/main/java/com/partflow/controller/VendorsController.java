@@ -3,6 +3,7 @@ package com.partflow.controller;
 
 import com.partflow.model.Vendor;
 import com.partflow.repository.VendorRepository;
+import com.partflow.service.VendorService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,6 +27,9 @@ public class VendorsController {
 
     @Autowired
     private VendorRepository vendorRepository;
+
+    @Autowired
+    private VendorService vendorService;
 
     @FXML
     public void initialize() {
@@ -80,15 +84,30 @@ public class VendorsController {
         dialog.showAndWait().ifPresent(input -> {
             String[] parts = input.split(",");
             if (parts.length == 4) {
+                String name = parts[0].trim();
+                String contactPerson = parts[1].trim();
+                String phone = parts[2].trim();
+                String email = parts[3].trim();
+
+                if (name.isEmpty() || contactPerson.isEmpty() || phone.isEmpty() || email.isEmpty()) {
+                    showAlert("Validation Error", "All fields must be filled.");
+                    return;
+                }
+                // Basic email validation
+                if (!email.matches(".+@.+\\..+")) {
+                    showAlert("Validation Error", "Invalid email format.");
+                    return;
+                }
+
                 Vendor vendor = new Vendor();
-                vendor.setName(parts[0].trim());
-                vendor.setContactPerson(parts[1].trim());
-                vendor.setPhone(parts[2].trim());
-                vendor.setEmail(parts[3].trim());
-                Vendor saved = vendorRepository.save(vendor);
+                vendor.setName(name);
+                vendor.setContactPerson(contactPerson);
+                vendor.setPhone(phone);
+                vendor.setEmail(email);
+                Vendor saved = vendorService.saveVendor(vendor);
                 vendorList.add(saved);
             } else {
-                showAlert("Invalid input format.");
+                showAlert("Invalid input format. Please use: Name, Contact Person, Phone, Email");
             }
         });
     }
@@ -117,6 +136,13 @@ public class VendorsController {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setContentText(msg);
+        alert.showAndWait();
+    }
+
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setContentText(content);
         alert.showAndWait();
     }
 }
