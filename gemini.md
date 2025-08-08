@@ -57,13 +57,13 @@ PartFlow is a desktop application for managing inventory and sales. It is built 
         *   Apply new global styles to report generation controls and display area.
         *   Improve readability of generated reports.
 
-**Phase 2: Core Functionality Enhancements (TODO)**
+**Phase 2: Core Functionality Enhancements (IN PROGRESS)**
 *   **Objective:** Implement key features to enhance the core inventory and sales management capabilities.
 *   **Tasks:**
     *   **Part Management:**
-        *   Implement functionality to edit and delete parts.
-        *   Add validation for part input fields (e.g., price must be numeric, quantity non-negative).
-        *   Implement search and filter capabilities for parts.
+        *   Implement functionality to edit and delete parts. (COMPLETED)
+        *   Add validation for part input fields (e.g., price must be numeric, quantity non-negative). (COMPLETED)
+        *   Implement search and filter capabilities for parts. (COMPLETED)
     *   **Vendor Management:**
         *   Implement functionality to edit and delete vendors.
         *   Add validation for vendor input fields.

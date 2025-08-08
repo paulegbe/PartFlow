@@ -32,6 +32,7 @@
       <ToggleButton mnemonicParsing="false" onAction="#goToRestocking" maxWidth="Infinity" styleClass="sidebar-button" text="Restocking" toggleGroup="$sidebarToggleGroup" />
       <ToggleButton mnemonicParsing="false" onAction="#goToVendors" maxWidth="Infinity" styleClass="sidebar-button" text="Vendors" toggleGroup="$sidebarToggleGroup" />
       <ToggleButton mnemonicParsing="false" onAction="#goToReports" maxWidth="Infinity" styleClass="sidebar-button" text="Reports" toggleGroup="$sidebarToggleGroup" />
+      <ToggleButton mnemonicParsing="false" onAction="#logout" maxWidth="Infinity" styleClass="sidebar-button" text="Logout" toggleGroup="$sidebarToggleGroup" fx:id="logoutButton" />
       <Region VBox.vgrow="ALWAYS" />
       <Label text="PartFlow v0.0.1" styleClass="version-label" />
    </children>
