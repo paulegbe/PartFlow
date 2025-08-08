@@ -72,6 +72,10 @@ public class SidebarController {
             Stage stage = (Stage) mainController.getRootPane().getScene().getWindow();
             stage.setTitle("PartFlow - Login");
             stage.setScene(new Scene(loginRoot));
+            stage.setResizable(false);
+            stage.setMinWidth(800);
+            stage.setMinHeight(500);
+            stage.sizeToScene();
             stage.centerOnScreen();
             stage.show();
         } catch (Exception e) {
