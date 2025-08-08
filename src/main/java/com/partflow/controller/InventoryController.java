@@ -80,13 +80,21 @@ public class InventoryController {
 
                     deleteBtn.setOnAction(e -> {
                         Part selected = getTableView().getItems().get(getIndex());
-                        try {
-                            partService.deletePart(selected.getId());
-                            masterPartList.remove(selected);
-                            handleSearch();
-                        } catch (Exception ex) {
-                            showAlert("Delete Error", "Cannot delete this part because it has associated sales records. Please delete the sales first.");
-                        }
+                        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+                        confirm.setTitle("Delete Part");
+                        confirm.setHeaderText(null);
+                        confirm.setContentText("Are you sure you want to delete '" + selected.getPartName() + "'? This action cannot be undone.");
+                        confirm.showAndWait().ifPresent(btn -> {
+                            if (btn == ButtonType.OK) {
+                                try {
+                                    partService.deletePart(selected.getId());
+                                    masterPartList.remove(selected);
+                                    handleSearch();
+                                } catch (Exception ex) {
+                                    showAlert("Delete Error", "Cannot delete this part because it has associated sales records. Please delete the sales first.");
+                                }
+                            }
+                        });
                     });
                 }
 

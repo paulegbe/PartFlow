@@ -45,8 +45,20 @@ public class VendorsController {
                 editBtn.setOnAction(e -> editVendor(getTableView().getItems().get(getIndex())));
                 deleteBtn.setOnAction(e -> {
                     Vendor selected = getTableView().getItems().get(getIndex());
-                    vendorRepository.deleteById(selected.getId());
-                    vendorList.remove(selected);
+                    Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+                    confirm.setTitle("Delete Vendor");
+                    confirm.setHeaderText(null);
+                    confirm.setContentText("Are you sure you want to delete '" + selected.getName() + "'? This action cannot be undone.");
+                    confirm.showAndWait().ifPresent(btn -> {
+                        if (btn == ButtonType.OK) {
+                            try {
+                                vendorRepository.deleteById(selected.getId());
+                                vendorList.remove(selected);
+                            } catch (Exception ex) {
+                                showAlert("Delete Error", "Cannot delete this vendor. Ensure no parts depend on it.");
+                            }
+                        }
+                    });
                 });
             }
 
@@ -128,10 +140,28 @@ public class VendorsController {
         dialog.showAndWait().ifPresent(input -> {
             String[] parts = input.split(",");
             if (parts.length == 4) {
-                vendor.setName(parts[0].trim());
-                vendor.setContactPerson(parts[1].trim());
-                vendor.setPhone(parts[2].trim());
-                vendor.setEmail(parts[3].trim());
+                String newName = parts[0].trim();
+                String newContact = parts[1].trim();
+                String newPhone = parts[2].trim();
+                String newEmail = parts[3].trim();
+
+                if (newName.isEmpty() || newContact.isEmpty() || newPhone.isEmpty() || newEmail.isEmpty()) {
+                    showAlert("Validation Error", "All fields must be filled.");
+                    return;
+                }
+                if (!newEmail.matches(".+@.+\\..+")) {
+                    showAlert("Validation Error", "Invalid email format.");
+                    return;
+                }
+                if (!newPhone.matches("^[+\\d][\\d\\s\\-()]{6,}$")) {
+                    showAlert("Validation Error", "Invalid phone format.");
+                    return;
+                }
+
+                vendor.setName(newName);
+                vendor.setContactPerson(newContact);
+                vendor.setPhone(newPhone);
+                vendor.setEmail(newEmail);
                 vendorRepository.save(vendor);
                 vendorTable.refresh();
             } else {
