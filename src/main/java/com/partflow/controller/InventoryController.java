@@ -14,9 +14,6 @@ import javafx.collections.ObservableList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.*;
-import javafx.util.Callback;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.Button;
 
