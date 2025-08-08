@@ -1,6 +1,11 @@
 package com.partflow.controller;
 
+import com.partflow.config.ApplicationContextProvider;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -51,6 +56,26 @@ public class SidebarController {
     public void goToReports() {
         if (mainController != null) {
             mainController.loadContent("Reports.fxml");
+        }
+    }
+
+    @FXML
+    public void handleLogout() {
+        if (mainController == null || mainController.getRootPane() == null) {
+            return;
+        }
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Login.fxml"));
+            loader.setControllerFactory(ApplicationContextProvider.getApplicationContext()::getBean);
+            Parent loginRoot = loader.load();
+
+            Stage stage = (Stage) mainController.getRootPane().getScene().getWindow();
+            stage.setTitle("PartFlow - Login");
+            stage.setScene(new Scene(loginRoot));
+            stage.centerOnScreen();
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
